@@ -1,0 +1,22 @@
+
+
+// Dynamically add the new student to the list without reloading the page
+const studentTable = document.getElementById('studentTable');
+const newRow = `
+  <tr>
+    <td><%= j @student.name %></td>
+    <td><%= j @student.subject %></td>
+    <td><%= j @student.marks %></td>
+    <td>
+      <button>Edit</button>
+      <button>Delete</button>
+    </td>
+  </tr>
+`;
+studentTable.insertAdjacentHTML('beforeend', newRow);
+
+// Close the modal
+document.getElementById('studentModal').style.display = 'none';
+
+// Clear the form fields
+document.getElementById('studentForm').reset();

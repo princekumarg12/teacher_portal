@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TeacherPortal</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+
+<% if teacher_signed_in? %>
+  <nav class="navbar">
+    <div class="navbar-left">
+      <span class="brand">Tailswebs</span>
+    </div>
+    <div class="navbar-right">
+      Logged in as <%= current_teacher.email %> |
+      <%= link_to 'Home', students_path %> |
+      <%= link_to 'Logout', destroy_teacher_session_path, method: :delete %>
+    </div>
+  </nav>
+<% else %>
+  <nav class="navbar">
+    <div class="navbar-left">
+      <span class="brand">Tailswebs</span>
+    </div>
+    <div class="navbar-right">
+      <%= link_to 'Login', new_teacher_session_path %>
+    </div>
+  </nav>
+<% end %>
+
+<%= yield %>
+</body>
+
+
+</html>

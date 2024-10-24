@@ -1,0 +1,16 @@
+<!-- app/views/students/_form.html.erb -->
+<%= form_with model: @student, local: true do |f| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :subject %>
+    <%= f.text_field :subject %>
+  </div>
+  <div>
+    <%= f.label :marks %>
+    <%= f.number_field :marks %>
+  </div>
+  <%= f.submit @student.new_record? ? 'Add Student' : 'Update Student' %>
+<% end %>
