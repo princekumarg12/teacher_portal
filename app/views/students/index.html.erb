@@ -1,119 +1,47 @@
-<style>
-    /* Modal container */
-    .modal {
-        display: none; /* Hidden by default */
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5); /* Dark background */
-    }
-
-    /* Modal content box */
-    .modal-content {
-        background-color: white;
-        margin: 10% auto;
-        padding: 30px;
-        border-radius: 10px;
-        width: 40%;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        position: relative;
-    }
-
-    /* Close button */
-    .close {
-        position: absolute;
-        top: 10px;
-        right: 20px;
-        font-size: 24px;
-        cursor: pointer;
-    }
-
-    /* Form input fields */
-    .input-field {
-        margin: 20px 0;
-    }
-
-    input[type="text"], input[type="number"] {
-        width: 100%;
-        padding: 10px;
-        margin-top: 5px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-
-    button.modal-submit-btn {
-        background-color: #333;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    button.modal-submit-btn:hover {
-        background-color: #555;
-    }
-
-    table {
-        border-collapse: collapse;
-        width: 100%;
-    }
-
-    table th,
-    table td {
-        padding: 10px;
-        border: 1px solid #ddd;
-        text-align: left;
-    }
-
-    table thead th {
-        background-color: #f2f2f2;
-        color: #000;
-    }
-
-</style>
 <h1>Student List</h1>
-<% if @students.present? %>
-  <table>
-    <thead>
-    <tr>
-      <th>Name</th>
-      <th>Subject</th>
-      <th>Marks</th>
-      <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <% @students.each do |student| %>
+<div class="table-container">
+  <% if @students.present? %>
+    <table>
+      <thead>
       <tr>
-        <td><%= student.name %></td>
-        <td><%= student.subject %></td>
-        <td><%= student.marks %></td>
-        <td>
-          <%#= link_to 'Edit', edit_student_path(student) %>
-          <%= link_to 'Edit', '#', class: 'edit-student-btn', data: { student: student.to_json } %>
-          <%= link_to 'Delete', student, method: :delete, data: { confirm: 'Are you sure?' } %>
-        </td>
+        <th>Name</th>
+        <th>Subject</th>
+        <th>Marks</th>
+        <th>Actions</th>
       </tr>
-    <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+      <% @students.each do |student| %>
+        <tr>
+          <td><%= student.name %></td>
+          <td><%= student.subject %></td>
+          <td><%= student.marks %></td>
+          <td>
+            <%= link_to 'Edit', '#', class: 'edit-student-btn', data: { student: student.to_json } %>
+            <%= link_to 'Delete', student, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>No Student Record Found</p>
+  <% end %>
+  <div>
+    <%= link_to 'Add New Student', '#', id: 'openModalBtn', class: 'add-student-btn' %>
+  </div>
+</div>
 
-<% else %>
-  <p> No Student Record Found</p>
-<% end %>
-
-<%= link_to 'Add New Student', '#', id: 'openModalBtn', class: 'add-student-btn' %>
+<div class="pagination-container">
+  <%= paginate @students if @students.present? %>
+</div>
 
 <!-- The Modal Form -->
 <div id="studentModal" class="modal" style="display:none;">
   <div class="modal-content">
     <span class="close" style="cursor:pointer;">&times;</span>
     <h2 id="modalTitle">Add New Student</h2>
-    <%= form_with(model: @student, url: students_path, local: true, id: 'studentForm') do |form| %>
+    <%= form_with(model: @student, url: students_path, local: false, id: 'studentForm', data: { turbo: false }) do |form| %>
       <%= form.hidden_field :_method, value: 'post', id: 'methodField' %>
       <div class="input-field">
         <%= form.label :name, "Name:" %>
@@ -132,63 +60,66 @@
   </div>
 </div>
 
-
-
 <script>
-      // Get modal element
-      var modal = document.getElementById('studentModal');
-      var openModalBtn = document.getElementById('openModalBtn');
-      var closeBtn = document.getElementsByClassName('close')[0];
-      var studentForm = document.getElementById('studentForm');
-      const methodField = document.getElementById('methodField');
+    // Function to bind modal event listeners
+    function bindModalEvents() {
+        // Get modal element
+        var modal = document.getElementById('studentModal');
+        var openModalBtn = document.getElementById('openModalBtn');
+        var closeBtn = document.getElementsByClassName('close')[0];
 
-      // Listen for open click
-      openModalBtn.addEventListener('click', function (event) {
-          event.preventDefault(); // Prevent default action
-          // Clear the form
-          resetModal();
-          modal.style.display = 'block';
-      });
+        // Listen for open click
+        openModalBtn.addEventListener('click', function (event) {
+            event.preventDefault(); // Prevent default action
+            resetModal();
+            modal.style.display = 'block';
+        });
 
-      // Listen for close click
-      closeBtn.addEventListener('click', function () {
-          modal.style.display = 'none';
-      });
+        // Listen for close click
+        closeBtn.addEventListener('click', function () {
+            modal.style.display = 'none';
+        });
 
-      // Close modal if clicked outside modal content
-      window.addEventListener('click', function (event) {
-          if (event.target == modal) {
-              modal.style.display = 'none';
-          }
-      });
+        // Close modal if clicked outside modal content
+        window.addEventListener('click', function (event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
 
-      // Handle edit button clicks
-      document.querySelectorAll('.edit-student-btn').forEach(function (button) {
-          button.addEventListener('click', function (event) {
-              event.preventDefault(); // Prevent default action
-              const studentData = JSON.parse(this.getAttribute('data-student'));
-              populateModal(studentData); // Populate the modal with student data
-              modal.style.display = 'block'; // Open the modal
-          });
-      });
+        // Delegate event for edit buttons
+        document.addEventListener('click', function (event) {
+            if (event.target.classList.contains('edit-student-btn')) {
+                event.preventDefault(); // Prevent default action
+                const studentData = JSON.parse(event.target.getAttribute('data-student'));
+                populateModal(studentData); // Populate the modal with student data
+                modal.style.display = 'block'; // Open the modal
+            }
+        });
+    }
 
-      function resetModal() {
-          // Reset form fields
-          document.querySelector('#studentForm').reset();
-          document.querySelector('.modal-content h2').textContent = "Add New Student"; // Reset title
-          document.querySelector('.modal-submit-btn').value = "Add Student"; // Reset button text
-      }
+    function resetModal() {
+        // Reset form fields
+        document.getElementById('studentForm').reset();
+        document.querySelector('.modal-content h2').textContent = "Add New Student"; // Reset title
+        document.querySelector('.modal-submit-btn').value = "Add Student"; // Reset button text
+        document.getElementById('methodField').value = 'post'; // Reset method to POST
+    }
 
-      function populateModal(student) {
-          // Fill form with student data
-          studentForm.action = `/students/${student.id}`; // Use student ID for editing
-          methodField.value = 'patch'; // Set the hidden method field to PATCH
-          document.querySelector('input[name="student[name]"]').value = student.name;
-          document.querySelector('input[name="student[subject]"]').value = student.subject;
-          document.querySelector('input[name="student[marks]"]').value = student.marks;
+    function populateModal(student) {
+        // Fill form with student data
+        const studentForm = document.getElementById('studentForm');
+        studentForm.action = `/students/${student.id}`; // Use student ID for editing
+        document.getElementById('methodField').value = 'patch'; // Set method to PATCH
+        document.querySelector('input[name="student[name]"]').value = student.name;
+        document.querySelector('input[name="student[subject]"]').value = student.subject;
+        document.querySelector('input[name="student[marks]"]').value = student.marks;
 
-          // Change modal title and button text
-          document.querySelector('.modal-content h2').textContent = "Edit Student";
-          document.querySelector('.modal-submit-btn').value = "Update Student"; // Change button text
-      }
+        // Change modal title and button text
+        document.querySelector('.modal-content h2').textContent = "Edit Student";
+        document.querySelector('.modal-submit-btn').value = "Update Student"; // Change button text
+    }
+
+    // Initial binding of events
+    bindModalEvents();
 </script>

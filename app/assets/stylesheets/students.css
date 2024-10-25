@@ -1,0 +1,152 @@
+
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination .page {
+    margin: 0 5px;
+}
+
+.pagination .page a,
+.pagination .page span {
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.pagination .page a:hover {
+    background-color: #f0f0f0;
+}
+
+.pagination .active span {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.pagination .next a,
+.pagination .prev a {
+    color: #007bff;
+}
+
+.pagination .disabled span {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.table-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 70vh;
+/ / Adjust height as needed for the table position: relative;
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: auto;
+/ / Ensures it stays below the table padding-top: 10 px;
+/ / Adds some spacing between table and pagination position: fixed;
+    bottom: 20px;
+/ / Distance from the bottom of the screen width: 100 %;
+    background-color: #fff;
+/ / Optional: background for visibility
+}
+
+/* Modal container */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark background */
+}
+
+/* Modal content box */
+.modal-content {
+    background-color: white;
+    margin: 10% auto;
+    padding: 30px;
+    border-radius: 10px;
+    width: 40%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+/* Close button */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Form input fields */
+.input-field {
+    margin: 20px 0;
+}
+
+input[type="text"], input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button.modal-submit-btn {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button.modal-submit-btn:hover {
+    background-color: #555;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+table th,
+table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+table thead th {
+    background-color: #f2f2f2;
+    color: #000;
+}
+
+.add-student-btn, .modal-submit-btn {
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.add-student-btn:hover,.modal-submit-btn:hover {
+    background-color: darkgray;
+}

@@ -3,7 +3,7 @@ class StudentsController < ApplicationController
   before_action :set_student, only: [:edit, :update, :destroy]
 
   def index
-    @students = current_teacher.students
+    @students = current_teacher.students.page(params[:page]).per(10)
   end
 
   def new

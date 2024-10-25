@@ -1,15 +1,17 @@
 
 # Ensure there is a teacher to associate with the students
-teacher = Teacher.create!(email: "teacher@example.com", password: "123456") unless Teacher.exists?(email: "teacher@example.com")
+# teacher = Teacher.create!(email: "teacher@example.com", password: "123456") unless Teacher.exists?(email: "teacher@example.com")
+teacher = Teacher.find_or_create_by(email: "teacher@example.com") do |new_teacher|
+  new_teacher.password = "123456"
+end
 
-# Create 10 student records
-10.times do |i|
-  Student.create!(
-    name: "Student #{i + 1}",
-    subject: ["Math", "Science", "History", "English", "Art"].sample,
-    marks: rand(50..100),
-    teacher: teacher # Associate with the created teacher
+30.times do
+  Student.create(
+    name: Faker::Name.name,
+    subject: Faker::Educator.subject,
+    marks: Faker::Number.between(from: 50, to: 100),
+    teacher_id: teacher.id
   )
 end
 
-puts "10 students have been created!"
+puts "30 students have been created!"

@@ -36,20 +36,3 @@
     font-size: 1.2em;
     color: #b60e0e; /* Brand text color */
 }
-
-/*!* Additional styles for notices and alerts *!*/
-/*.notice, .alert {*/
-/*    text-align: center;*/
-/*    padding: 10px;*/
-/*    margin-bottom: 10px;*/
-/*}*/
-
-/*.notice {*/
-/*    background-color: #e0ffe0;*/
-/*    color: green;*/
-/*}*/
-
-/*.alert {*/
-/*    background-color: #ffe0e0;*/
-/*    color: red;*/
-/*}*/
