@@ -45,19 +45,18 @@
     display: flex;
     flex-direction: column;
     min-height: 70vh;
-/ / Adjust height as needed for the table position: relative;
+    position: relative;
 }
 
 .pagination-container {
     display: flex;
     justify-content: center;
     margin-top: auto;
-/ / Ensures it stays below the table padding-top: 10 px;
-/ / Adds some spacing between table and pagination position: fixed;
+    padding-top: 10 px;
+    position: fixed;
     bottom: 20px;
-/ / Distance from the bottom of the screen width: 100 %;
+    width: 100%;
     background-color: #fff;
-/ / Optional: background for visibility
 }
 
 /* Modal container */

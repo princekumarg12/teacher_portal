@@ -30,6 +30,8 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise'
 gem 'kaminari'
 gem 'faker'
+gem 'ffi', '>= 1.15'
+gem 'loofah', '>= 2.20'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
