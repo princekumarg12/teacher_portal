@@ -5,12 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="16df4d61-b747-4e06-b691-30d5c349543f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/teacher_portal.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/teacher_portal.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nginx.conf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gemfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,7 +156,7 @@
       <workItem from="1729942674369" duration="1865000" />
       <workItem from="1729946506829" duration="6444000" />
       <workItem from="1730025573788" duration="1325000" />
-      <workItem from="1730032231843" duration="1115000" />
+      <workItem from="1730032231843" duration="2212000" />
     </task>
     <servers />
   </component>
